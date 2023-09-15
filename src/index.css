@@ -37,7 +37,13 @@ a:hover {
   opacity: 1;
   transform: translateY(0%);
 }
+.font-xs {
+  font-size: 10px;
+}
 .font-sm {
+  font-size: 12px;
+}
+.font-md {
   font-size: 14px;
 }
 .text-main {

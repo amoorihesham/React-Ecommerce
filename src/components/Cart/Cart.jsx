@@ -16,7 +16,7 @@ const Cart = () => {
                 <h5>Title</h5>
                 <p className="text-main">Price</p>
                 <button className="btn text-white bg-main">
-                  <i class="fa-solid fa-eraser  me-1"></i>
+                  <i className="fa-solid fa-eraser  me-1"></i>
                   Remove
                 </button>
               </div>
