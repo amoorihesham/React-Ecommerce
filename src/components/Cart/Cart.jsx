@@ -1,32 +1,122 @@
-import React from "react";
-import style from "./Cart.module.css";
+import React, { useContext, useEffect, useState } from "react";
 import image from "../../Assets/1678305677165-cover.jpeg";
+import { CartContext } from "../../context/CartContext";
+import { toast } from "react-toastify";
+import { Triangle } from "react-loader-spinner";
 
 const Cart = () => {
+  const [cartItems, setCartItems] = useState(null);
+  const [cartPrice, setCartPrice] = useState(null);
+  const { getLoggedUserCart, removeFromCart, clearCart, updateCartQyantity } =
+    useContext(CartContext);
+
+  async function removeAllCart() {
+    const { data } = await clearCart();
+    getUserCart();
+    console.log(data);
+    toast("Cart Cleard Successfully", {
+      type: "success",
+      autoClose: 1000,
+      hideProgressBar: false,
+    });
+  }
+  async function getUserCart(prodId) {
+    const { data } = await getLoggedUserCart();
+    await setCartItems(data?.data.products.filter((item) => item.count > 0));
+    await setCartPrice(data?.data.totalCartPrice);
+  }
+  async function RemoveFromCart(prodId) {
+    const { data } = await removeFromCart(prodId);
+    await getUserCart();
+    toast("Item Removed Successfully", {
+      type: "success",
+      autoClose: 1000,
+      hideProgressBar: false,
+    });
+  }
+  async function updateItemsCount(prodId, count) {
+    const { data } = await updateCartQyantity(prodId, count);
+    await getUserCart();
+  }
+  useEffect(() => {
+    getUserCart();
+  }, []);
   return (
     <div className="cartPage py-2 h-100vh">
       <div className="container">
         <div className="wraper bg-main-light p-4 rounded">
           <h3>Shop Cart:</h3>
-          <p className="text-main">Total Cart Price: 1,547 EGP</p>
-          <div className="itemBox border-bottom py-2 px-3 d-flex align-items-center justify-content-between">
-            <div className="productInfo d-flex align-items-center">
-              <img src={image} alt="" className="w-100p" />
-              <div className="info mx-3">
-                <h5>Title</h5>
-                <p className="text-main">Price</p>
-                <button className="btn text-white bg-main">
-                  <i className="fa-solid fa-eraser  me-1"></i>
-                  Remove
-                </button>
+          <p className="text-main">Total Cart Price: {cartPrice} EGP</p>
+          <p className="text-main">Total Cart Items ({cartItems?.length})</p>
+          <button
+            className="btn bg-main text-white mb-4"
+            onClick={removeAllCart}
+          >
+            Clear Cart
+          </button>
+          {cartItems?.length > 0 ? (
+            cartItems.map((item) => (
+              <div
+                className="row align-items-center py-2 border-bottom "
+                key={item.product._id}
+              >
+                <div className="col-md-8">
+                  <div className="box d-flex align-items-center gap-3">
+                    <img
+                      src={item.product.imageCover}
+                      alt={item.product.title}
+                      className="w-25"
+                    />
+
+                    <div className="info">
+                      {" "}
+                      <h3 className="h5">{item.product.title}</h3>
+                      <p className="text-main">{item.price} EGP</p>
+                      <p className="text-main fw-bold">
+                        {item.product.category.name}
+                      </p>
+                      <button
+                        className="btn text-white bg-main cursor-pointer"
+                        onClick={() => {
+                          RemoveFromCart(item.product._id);
+                        }}
+                      >
+                        <i className="fa-solid fa-xmark"></i> Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="quantity d-flex align-items-center justify-content-center">
+                    <button
+                      className="btn btn-sm bg-main text-white font-sm"
+                      onClick={() => {
+                        updateItemsCount(item.product._id, item.count + 1);
+                      }}
+                    >
+                      +
+                    </button>
+                    <span className="fw-bold d-inline-block mx-3">
+                      {item.count}
+                    </span>
+                    <button
+                      className="btn btn-sm bg-main text-white font-sm"
+                      onClick={() => {
+                        updateItemsCount(item.product._id, item.count - 1);
+                      }}
+                    >
+                      -
+                    </button>
+                  </div>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="d-flex align-items-center justify-content-center">
+              <Triangle />
+              <h1 className="text-black-50 ms-3">No Items In Your Cart</h1>
             </div>
-            <div className="controlAmount d-flex align-items-center">
-              <button className="btn bg-main text-white fs-6 mx-2">+</button>
-              <span className="fs-6 fw-bold">3</span>
-              <button className="btn bg-main text-white fs-6 mx-2">-</button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

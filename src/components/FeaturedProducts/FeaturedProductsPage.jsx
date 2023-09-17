@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./FeaturedProducts.module.css";
 import axios from "axios";
 import { Grid } from "react-loader-spinner";
+import { UserContext } from "../../context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import { CartContext } from "../../context/CartContext";
 
 const FeaturedProductsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,11 +17,23 @@ const FeaturedProductsPage = () => {
     setProducts(data.data);
     setIsLoading(false);
   }
+  const { addToCart } = useContext(CartContext);
+
+  async function addCart(prodId) {
+    const { data } = await addToCart(prodId);
+    toast("Item Removed Successfully", {
+      type: "success",
+      autoClose: 1000,
+      hideProgressBar: false,
+    });
+  }
   useEffect(() => {
     getFeaturedProducts();
   }, []);
+
   return (
     <div className="row">
+      <ToastContainer />
       {isLoading ? (
         <div className=" h-100vh d-flex align-items-center justify-content-center">
           <Grid
@@ -34,7 +49,7 @@ const FeaturedProductsPage = () => {
         </div>
       ) : (
         <>
-          {products.map((product) => (
+          {products?.map((product) => (
             <div className="col-md-2" key={product.id}>
               <div className="product py-2 px-2 cursor-pointer">
                 <img
@@ -55,7 +70,10 @@ const FeaturedProductsPage = () => {
                     {product.ratingsAverage}
                   </p>
                 </div>
-                <button className="btn bg-main text-white w-100 btn-sm">
+                <button
+                  className="btn bg-main text-white w-100 btn-sm"
+                  onClick={() => addCart({ productId: product._id })}
+                >
                   Add To cart
                 </button>
               </div>

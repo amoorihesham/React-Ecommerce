@@ -3,11 +3,12 @@ import style from "./Home.module.css";
 
 import FeaturedProductsPage from "../FeaturedProducts/FeaturedProductsPage";
 import Categories from "../Categories/Categories";
-import Slider from "../Slider/Slider";
+
+import SliderComp from "../Slider/Slider";
 const Home = () => {
   return (
     <div className="container py-4 h-100vh">
-      <Slider />
+      <SliderComp />
       <Categories />
       <FeaturedProductsPage />
     </div>

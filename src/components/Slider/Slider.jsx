@@ -1,32 +1,37 @@
 import React from "react";
-import style from "./Slider.module.css";
-import Carousel from "nuka-carousel";
+import Slider from "react-slick";
 import image1 from "../../Assets/images/slider-image-1.jpeg";
 import image2 from "../../Assets/images/slider-image-2.jpeg";
 import image3 from "../../Assets/images/slider-image-3.jpeg";
-import banner from "../../Assets/images/assortment-citrus-fruits.png";
+import sample1 from "../../Assets/images/sample-1.jpg";
+import sample2 from "../../Assets/images/sample-2.jpg";
 
-const Slider = () => {
-  const options = {
+const SliderComp = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
     autoplay: true,
-    autoplayInterval: 4000,
-
-    speed: 2000,
-    withoutControls: true,
-    wrapAround: true,
-    pauseOnHover: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
   };
   return (
-    <div className="row">
+    <div className="row g-0">
       <div className="col-xl-8">
-        <Carousel {...options} style={{ height: "300px" }}>
-          <img src={image1} alt="" className="w-100 h-50" />
-          <img src={image2} alt="" className="w-100 h-50" />
-          <img src={image3} alt="" className="w-100 h-50" />
-        </Carousel>
+        <Slider {...settings}>
+          <img src={image1} height={400} alt="gallary" className="w-100" />
+
+          <img src={image2} height={400} alt="gallary" className="w-100" />
+          <img src={image3} height={400} alt="gallary" className="w-100" />
+        </Slider>
+      </div>
+      <div className="col-xl-4">
+        <img src={sample1} alt="" className="w-100" height={200}/>
+        <img src={sample2} alt=""  className="w-100" height={200}/>
       </div>
     </div>
   );
 };
 
-export default Slider;
+export default SliderComp;

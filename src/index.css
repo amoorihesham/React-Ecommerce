@@ -16,6 +16,9 @@ body {
 .rating-color {
   color: var(--rating-color);
 }
+.shadow-me {
+  box-shadow: rgba(145, 158, 171, 0.12) 7px 1px 10px;
+}
 .cursor-pointer {
   cursor: pointer;
 }
@@ -81,4 +84,23 @@ a:hover {
 }
 .h-100vh {
   min-height: calc(100vh - (59.08px + 301.59px)) !important;
+}
+
+.hover:hover {
+  border: 1px solid var(--main-color);
+}
+.cartNumber {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  padding: 5px;
+  width: 18px;
+  height: 18px;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
