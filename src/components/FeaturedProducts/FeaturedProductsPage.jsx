@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import style from "./FeaturedProducts.module.css";
 import axios from "axios";
-import { Grid } from "react-loader-spinner";
-import { UserContext } from "../../context/UserContext";
+import { Triangle } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
+import { WishListContext } from "../../context/WishListContext";
 
 const FeaturedProductsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
+  const { addToCart, setCartCount } = useContext(CartContext);
+  const { addToWishList, setWishListCount, GetUserWishList } =
+    useContext(WishListContext);
+
   async function getFeaturedProducts() {
     setIsLoading(true);
     const { data } = await axios.get(
@@ -17,16 +20,29 @@ const FeaturedProductsPage = () => {
     setProducts(data.data);
     setIsLoading(false);
   }
-  const { addToCart } = useContext(CartContext);
+  async function addToWISHLIST(prodId) {
+    const { data } = await addToWishList(prodId);
+    const res = await GetUserWishList();
+    setWishListCount(res?.data?.count);
 
+    if (data?.status === "success") {
+      toast("Product Add Successfully", {
+        type: "success",
+        autoClose: 1000,
+        hideProgressBar: false,
+      });
+    }
+  }
   async function addCart(prodId) {
     const { data } = await addToCart(prodId);
+    await setCartCount(data?.numOfCartItems);
     toast("Item Removed Successfully", {
       type: "success",
       autoClose: 1000,
       hideProgressBar: false,
     });
   }
+
   useEffect(() => {
     getFeaturedProducts();
   }, []);
@@ -36,16 +52,7 @@ const FeaturedProductsPage = () => {
       <ToastContainer />
       {isLoading ? (
         <div className=" h-100vh d-flex align-items-center justify-content-center">
-          <Grid
-            height="120"
-            width="120"
-            color="#4fa94d"
-            ariaLabel="grid-loading"
-            radius="12.5"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
+          <Triangle />
         </div>
       ) : (
         <>
@@ -71,10 +78,17 @@ const FeaturedProductsPage = () => {
                   </p>
                 </div>
                 <button
-                  className="btn bg-main text-white w-100 btn-sm"
+                  className="btn bg-main text-white w-100 btn-sm mb-2"
                   onClick={() => addCart({ productId: product._id })}
                 >
-                  Add To cart
+                  <i className="fa-solid fa-cart-plus fs-fw"></i> Add To cart
+                </button>
+                <button
+                  className="btn bg-main text-white w-100 btn-sm"
+                  onClick={() => addToWISHLIST({ productId: product._id })}
+                >
+                  <i className="fa-solid fa-heart-circle-plus fs-fw"></i> Add To
+                  WishList
                 </button>
               </div>
             </div>

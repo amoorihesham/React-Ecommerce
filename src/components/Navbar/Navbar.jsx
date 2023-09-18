@@ -1,27 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
-import style from "./Navbar.module.css";
+import React, { useContext } from "react";
+
 import logo from "../../Assets/images/freshcart-logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { CartContext } from "../../context/CartContext";
+import { WishListContext } from "../../context/WishListContext";
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState(null);
   const { setUserToken, userToken } = useContext(UserContext);
-  const { getLoggedUserCart } = useContext(CartContext);
+  const { cartCount } = useContext(CartContext);
+  const { wishListCount } = useContext(WishListContext);
   const navigate = useNavigate();
   const LogOut = () => {
     localStorage.removeItem("userToken");
     setUserToken(null);
     navigate("/login");
   };
-  async function liked() {
-    const { data } = await getLoggedUserCart();
-    setCartItems(data?.data.products.filter((item) => item.count > 0).length);
-  }
-  useEffect(() => {
-    liked();
-  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -47,12 +42,7 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link position-relative" to={"/cart"}>
-                  Cart <i className="fa-solid fa-cart-shopping"></i>
-                  <span className="cartNumber">{cartItems}</span>
-                </NavLink>
-              </li>
+
               <li className="nav-item">
                 <NavLink className="nav-link" to="/products">
                   Products
@@ -66,6 +56,25 @@ const Navbar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/brands">
                   Brands
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link position-relative" to={"/cart"}>
+                  Cart <i className="fa-solid fa-cart-shopping"></i>
+                  <span className="cartNumber">
+                    {cartCount ? cartCount : 0}
+                  </span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link position-relative"
+                  to={"/wishlist"}
+                >
+                  WishList <i className="fa-solid fa-rectangle-list"></i>
+                  <span className="cartNumber">
+                    {wishListCount ? wishListCount : 0}
+                  </span>
                 </NavLink>
               </li>
               <li className="nav-item">

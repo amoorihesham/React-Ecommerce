@@ -12,9 +12,11 @@ import Products from "./components/Products/Products";
 import Categories from "./components/Categories/Categories";
 import Brands from "./components/Brands/Brands";
 import Product from "./components/Product/Product";
+import WishList from "./components/WishList/WishList";
 import NotFound from "./components/NotFound/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { useContext, useEffect } from "react";
+import { WishListContext } from "./context/WishListContext";
 
 const router = createBrowserRouter([
   {
@@ -79,18 +81,33 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/wishlist",
+        element: (
+          <ProtectedRoute>
+            <WishList />
+          </ProtectedRoute>
+        ),
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
 ]);
 function App() {
   const { setUserToken } = useContext(UserContext);
-  const { getLoggedUserCart } = useContext(CartContext);
+  const { getLoggedUserCart, setCartCount } = useContext(CartContext);
+  const { setWishListCount, GetUserWishList } = useContext(WishListContext);
 
+  async function setCartCountData() {
+    const { data } = await getLoggedUserCart();
+    const res = await GetUserWishList();
+    setWishListCount(res?.data?.count);
+    await setCartCount(data?.numOfCartItems);
+  }
   useEffect(() => {
     if (localStorage.getItem("userToken") !== null) {
       setUserToken(localStorage.getItem("userToken"));
-      getLoggedUserCart();
+      setCartCountData();
     }
   }, []);
 

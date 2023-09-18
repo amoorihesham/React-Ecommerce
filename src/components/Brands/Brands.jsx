@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import style from "./Brands.module.css";
 import axios from "axios";
-import { Grid } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 
 const Brands = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,16 +30,7 @@ const Brands = () => {
           {isLoading ? (
             <div className="h-100vh d-flex align-items-center justify-content-center">
               {" "}
-              <Grid
-                height="120"
-                width="120"
-                color="#4fa94d"
-                ariaLabel="grid-loading"
-                radius="12.5"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-              />
+              <Triangle />
             </div>
           ) : (
             <>

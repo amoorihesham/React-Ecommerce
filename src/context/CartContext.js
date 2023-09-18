@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const CartContext = createContext();
 const BaseUrl = "https://ecommerce.routemisr.com/api/v1/cart";
@@ -46,6 +46,7 @@ function clearCart() {
     .catch((err) => err);
 }
 const CartContextProvider = ({ children }) => {
+  const [cartCount, setCartCount] = useState(null);
   return (
     <CartContext.Provider
       value={{
@@ -54,6 +55,8 @@ const CartContextProvider = ({ children }) => {
         removeFromCart,
         clearCart,
         updateCartQyantity,
+        setCartCount,
+        cartCount,
       }}
     >
       {children}

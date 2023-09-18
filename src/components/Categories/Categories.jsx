@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Categories.module.css";
 import axios from "axios";
 import Slider from "react-slick";
+import { Triangle } from "react-loader-spinner";
 
 const Categories = () => {
   const settings = {
@@ -14,11 +15,14 @@ const Categories = () => {
     arrows: false,
   };
   const [categories, setCategories] = useState([]);
+  const [isLodaing, setIsLoading] = useState(false);
   async function getAllCategories() {
+    setIsLoading(true);
     const { data } = await axios.get(
       "https://ecommerce.routemisr.com/api/v1/categories"
     );
-    setCategories(data.data);
+    await setCategories(data.data);
+    setIsLoading(false);
   }
   useEffect(() => {
     getAllCategories();
@@ -28,7 +32,11 @@ const Categories = () => {
       <div className="container">
         <h2 className="mb-3">Shop Populare Categories</h2>
         <div className="row g-0">
-          {categories ? (
+          {isLodaing ? (
+            <div className="d-flex -align-items-center justify-content-center">
+              <Triangle />
+            </div>
+          ) : categories ? (
             <Slider {...settings}>
               {categories.map((cate) => (
                 <div className="box cursor-pointer" key={cate.name}>
@@ -38,7 +46,7 @@ const Categories = () => {
               ))}
             </Slider>
           ) : (
-            ""
+            "No Categories"
           )}
         </div>
       </div>

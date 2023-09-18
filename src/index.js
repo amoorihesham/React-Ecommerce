@@ -10,12 +10,18 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.css";
 import UserContextProvider from "./context/UserContext";
 import CartContextProvider from "./context/CartContext";
+import WishListContextProvider from "./context/WishListContext";
+import AddressesContextProvider from "./context/AddressesContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <CartContextProvider>
-    <UserContextProvider>
-      <App />
-    </UserContextProvider>
-  </CartContextProvider>
+  <UserContextProvider>
+    <AddressesContextProvider>
+      <CartContextProvider>
+        <WishListContextProvider>
+          <App />
+        </WishListContextProvider>
+      </CartContextProvider>
+    </AddressesContextProvider>
+  </UserContextProvider>
 );
