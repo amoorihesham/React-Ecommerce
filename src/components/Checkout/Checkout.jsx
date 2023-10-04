@@ -14,7 +14,7 @@ const Checkout = () => {
     e.preventDefault();
     await axios
       .post(
-        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://react-ecommerce-delta-woad.vercel.app/allorders`,
         {
           shippingAddress: {
             details,
