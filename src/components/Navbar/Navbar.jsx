@@ -7,12 +7,13 @@ import { CartContext } from "../../context/CartContext";
 import { WishListContext } from "../../context/WishListContext";
 
 const Navbar = () => {
-  const { setUserToken, userToken } = useContext(UserContext);
+  const { setUserToken, userToken, setUser } = useContext(UserContext);
   const { cartCount } = useContext(CartContext);
   const { wishListCount } = useContext(WishListContext);
   const navigate = useNavigate();
   const LogOut = () => {
-    localStorage.removeItem("userToken");
+    localStorage.clear();
+    setUser(null);
     setUserToken(null);
     navigate("/login");
   };

@@ -3,7 +3,7 @@ import style from "./Login.module.css";
 import { useFormik } from "formik";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
 
 const Login = () => {
@@ -19,6 +19,7 @@ const Login = () => {
         setIsLoading(false);
         localStorage.setItem("userToken", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        console.log(res?.data);
         setUser(res.data.user);
         setUserToken(res.data.token);
         navigate("/");
@@ -75,6 +76,9 @@ const Login = () => {
           </button>
         )}
       </form>
+      <Link to={"/passwordreset"} className=" text-primary fw-bold">
+        Forgot Password?
+      </Link>
     </div>
   );
 };

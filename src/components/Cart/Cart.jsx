@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { toast } from "react-toastify";
 import { Triangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
@@ -43,7 +44,6 @@ const Cart = () => {
     const { data } = await removeFromCart(prodId);
     await getUserCart();
     await setCartCount(data?.numOfCartItems);
-    console.log(data.numOfCartItems);
     toast("Item Removed Successfully", {
       type: "success",
       autoClose: 1000,
@@ -52,7 +52,6 @@ const Cart = () => {
   }
   async function updateItemsCount(prodId, count) {
     const { data } = await updateCartQyantity(prodId, count);
-    console.log(data);
     await getUserCart();
   }
   useEffect(() => {
@@ -63,7 +62,9 @@ const Cart = () => {
       <div className="container">
         <div className="wraper bg-main-light p-4 rounded">
           <h3>Shop Cart:</h3>
-          <p className="text-main">Total Cart Price: {cartPrice} EGP</p>
+          <p className="text-main">
+            Total Cart Price: {cartPrice ? cartPrice : 0} EGP
+          </p>
           <p className="text-main">
             Total Cart Items ({cartItems?.length || 0})
           </p>
@@ -143,6 +144,12 @@ const Cart = () => {
               )}
             </>
           )}
+          <Link
+            className="btn bn-sm bg-main text-white mt-3 ms-auto w-50"
+            to={"/checkout"}
+          >
+            Procced To checkout
+          </Link>
         </div>
       </div>
     </div>

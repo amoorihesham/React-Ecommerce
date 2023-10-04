@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import style from "./Categories.module.css";
 import axios from "axios";
 import Slider from "react-slick";
 import { Triangle } from "react-loader-spinner";
+import { Link, useParams } from "react-router-dom";
 
 const Categories = () => {
   const settings = {
@@ -16,6 +16,7 @@ const Categories = () => {
   };
   const [categories, setCategories] = useState([]);
   const [isLodaing, setIsLoading] = useState(false);
+
   async function getAllCategories() {
     setIsLoading(true);
     const { data } = await axios.get(
@@ -39,10 +40,20 @@ const Categories = () => {
           ) : categories ? (
             <Slider {...settings}>
               {categories.map((cate) => (
-                <div className="box cursor-pointer" key={cate.name}>
-                  <img src={cate.image} alt="" className="w-100" height={200} />
-                  <h3 className=" mt-2 text-center font-sm">{cate.name}</h3>
-                </div>
+                <Link
+                  to={`/categories/${cate._id}/subcategories`}
+                  key={cate.name}
+                >
+                  <div className="box cursor-pointer">
+                    <img
+                      src={cate.image}
+                      alt=""
+                      className="w-100"
+                      height={200}
+                    />
+                    <h3 className=" mt-2 text-center font-sm">{cate.name}</h3>
+                  </div>
+                </Link>
               ))}
             </Slider>
           ) : (

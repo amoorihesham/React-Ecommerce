@@ -1,8 +1,13 @@
 import React from "react";
-import style from "./Products.module.css";
+
+import FeaturedProductsPage from "../FeaturedProducts/FeaturedProductsPage";
 
 const Products = () => {
-  return <div>Products</div>;
+  return (
+    <div className="container py-4">
+      <FeaturedProductsPage />
+    </div>
+  );
 };
 
 export default Products;

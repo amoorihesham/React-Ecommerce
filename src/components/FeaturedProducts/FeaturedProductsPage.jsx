@@ -4,6 +4,7 @@ import { Triangle } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
 import { WishListContext } from "../../context/WishListContext";
+import { Link } from "react-router-dom";
 
 const FeaturedProductsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,9 +15,9 @@ const FeaturedProductsPage = () => {
 
   async function getFeaturedProducts() {
     setIsLoading(true);
-    const { data } = await axios.get(
-      "https://ecommerce.routemisr.com/api/v1/products"
-    );
+    const { data } = await axios
+      .get("https://ecommerce.routemisr.com/api/v1/products")
+      .catch((err) => console.log(err));
     setProducts(data.data);
     setIsLoading(false);
   }
@@ -36,7 +37,7 @@ const FeaturedProductsPage = () => {
   async function addCart(prodId) {
     const { data } = await addToCart(prodId);
     await setCartCount(data?.numOfCartItems);
-    toast("Item Removed Successfully", {
+    toast("Item Added Successfully", {
       type: "success",
       autoClose: 1000,
       hideProgressBar: false,
@@ -90,6 +91,12 @@ const FeaturedProductsPage = () => {
                   <i className="fa-solid fa-heart-circle-plus fs-fw"></i> Add To
                   WishList
                 </button>
+                <Link
+                  to={`/products/${product.id}`}
+                  className="btn bg-main text-white btn-sm w-100 mt-2"
+                >
+                  Details
+                </Link>
               </div>
             </div>
           ))}

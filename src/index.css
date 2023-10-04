@@ -104,3 +104,33 @@ a:hover {
   justify-content: center;
   font-size: 12px;
 }
+.slick-next {
+  right: 5px;
+}
+.slick-prev {
+  left: 5px;
+  z-index: 999;
+}
+.slick-prev,
+.slick-next {
+  background-color: var(--main-color);
+  /* color: white !important; */
+}
+.slick-prev::before,
+.slick-next::before {
+  color: white;
+  opacity: 1;
+}
+.offline {
+  padding: 10px;
+  color: black;
+  background-color: white;
+  box-shadow: var(--shadow);
+  width: 200px;
+  font-size: 14px;
+  font-weight: 300;
+  position: fixed;
+  top: 59px;
+  right: 20px;
+  text-align: center;
+}

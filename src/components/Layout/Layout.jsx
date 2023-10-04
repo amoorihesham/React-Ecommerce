@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import style from "./Layout.module.css";
+import React from "react";
+import { Offline, Online } from "react-detect-offline";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
@@ -12,6 +12,9 @@ const Layout = () => {
 
       <Outlet></Outlet>
       <ToastContainer />
+      <Offline>
+        <div className="offline">No Internet Connection</div>
+      </Offline>
 
       <Footer />
     </>
