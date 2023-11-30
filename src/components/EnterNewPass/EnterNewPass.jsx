@@ -11,7 +11,7 @@ const EnterNewPass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://ecommerce.routemisr.com/api/v1/auth/resetPassword", {
+      .put("https://ecommerce.routemisr.com/api/v1/auth/resetPassword", {
         email: email,
         newPassword: password,
       })

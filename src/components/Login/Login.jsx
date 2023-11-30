@@ -19,7 +19,6 @@ const Login = () => {
         setIsLoading(false);
         localStorage.setItem("userToken", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        console.log(res?.data);
         setUser(res.data.user);
         setUserToken(res.data.token);
         navigate("/");
@@ -35,50 +34,56 @@ const Login = () => {
     onSubmit: LoginSubmit,
   });
   return (
-    <div className="container d-flex align-items-center h-100vh">
-      <form className="w-80 mx-auto" onSubmit={formik.handleSubmit}>
-        <h4 className="mb-3">Login Now:</h4>
-        <div className="mb-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="form-control"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-          />
+    <div className="container h-100vh d-flex align-items-center ">
+      <div className="row align-items-center justify-content-between w-100 g-3">
+        <div className="col-md-9">
+          <form onSubmit={formik.handleSubmit}>
+            <h4 className="mb-3">Login Now:</h4>
+            <div className="mb-2">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                className="form-control"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+              />
+            </div>
+            <div className="mb-2">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                className="form-control"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+              />
+            </div>
+            {isLoading ? (
+              <button className="btn bg-main text-white" disabled>
+                <Audio
+                  height="20"
+                  width="80"
+                  radius="9"
+                  color="white"
+                  ariaLabel="three-dots-loading"
+                />
+              </button>
+            ) : (
+              <button className="btn bg-main text-white" type="submit">
+                Login
+              </button>
+            )}
+          </form>
         </div>
-        <div className="mb-2">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="form-control"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
+        <div className="col-md-3 text-center">
+          <Link to={"/passwordreset"} className=" text-primary fw-bold">
+            Forgot Password?
+          </Link>
         </div>
-        {isLoading ? (
-          <button className="btn bg-main text-white" disabled>
-            <Audio
-              height="20"
-              width="80"
-              radius="9"
-              color="white"
-              ariaLabel="three-dots-loading"
-            />
-          </button>
-        ) : (
-          <button className="btn bg-main text-white" type="submit">
-            Login
-          </button>
-        )}
-      </form>
-      <Link to={"/passwordreset"} className=" text-primary fw-bold">
-        Forgot Password?
-      </Link>
+      </div>
     </div>
   );
 };

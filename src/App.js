@@ -150,7 +150,6 @@ function App() {
 
   async function setCartCountData() {
     const { data } = await getLoggedUserCart();
-    console.log(data);
 
     const res = await GetUserWishList();
     setWishListCount(res?.data?.count);

@@ -58,7 +58,7 @@ const FeaturedProductsPage = () => {
       ) : (
         <>
           {products?.map((product) => (
-            <div className="col-md-2" key={product.id}>
+            <div className="col-md-3" key={product.id}>
               <div className="product py-2 px-2 cursor-pointer">
                 <img
                   src={product.imageCover}
