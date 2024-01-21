@@ -1,28 +1,24 @@
 import axios from "axios";
 import { createContext, useState } from "react";
+import { BaseUrl, headers } from "../utils/req_globals";
 
 export const WishListContext = createContext();
-const BaseUrl = "https://ecommerce.routemisr.com/api/v1/wishlist";
-const headers = {
-  headers: {
-    token: localStorage.getItem("userToken"),
-  },
-};
+
 function addToWishList(prodId) {
   return axios
-    .post(`${BaseUrl}`, prodId, headers)
+    .post(`${BaseUrl}/wishlist`, prodId, headers)
     .then((response) => response)
     .catch((err) => err);
 }
-function GetUserWishList(prodId) {
+function GetUserWishList() {
   return axios
-    .get(`${BaseUrl}`, headers)
+    .get(`${BaseUrl}/wishlist`, headers)
     .then((response) => response)
     .catch((err) => err);
 }
 function RemoveFromWishList(prodId) {
   return axios
-    .delete(`${BaseUrl}/${prodId}`, headers)
+    .delete(`${BaseUrl}/wishlist/${prodId}`, headers)
     .then((response) => response)
     .catch((err) => err);
 }

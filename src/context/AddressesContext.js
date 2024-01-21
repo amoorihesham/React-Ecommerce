@@ -1,24 +1,18 @@
 import axios from "axios";
 import { createContext } from "react";
+import { BaseUrl, headers } from "../utils/req_globals";
 
 export const AddressesContext = createContext();
-const BaseUrl = "https://ecommerce.routemisr.com/api/v1/addresses";
-const headers = {
-  headers: {
-    token: localStorage.getItem("userToken"),
-  },
-};
 
 function AddUserAddress(values) {
   return axios
-    .post(`${BaseUrl}`, values, headers)
+    .post(`${BaseUrl}/addresses`, values, headers)
     .then((response) => response)
     .catch((err) => err);
 }
-
 function GetLoggedUserAddresses() {
   return axios
-    .get(`${BaseUrl}`, headers)
+    .get(`${BaseUrl}/addresses`, headers)
     .then((response) => response)
     .catch((err) => err);
 }

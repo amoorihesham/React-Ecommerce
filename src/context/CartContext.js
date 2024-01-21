@@ -1,36 +1,32 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-
+import { BaseUrl, headers } from "../utils/req_globals";
 export const CartContext = createContext();
-const BaseUrl = "https://ecommerce.routemisr.com/api/v1/cart";
-const headers = {
-  token: localStorage.getItem("userToken"),
-};
 
 function addToCart(prodId) {
   return axios
-    .post(`${BaseUrl}`, prodId, { headers })
+    .post(`${BaseUrl}/cart`, prodId, { headers })
     .then((response) => response)
     .catch((err) => err);
 }
 
 function getLoggedUserCart() {
   return axios
-    .get(`${BaseUrl}`, { headers })
+    .get(`${BaseUrl}/cart`, { headers })
     .then((response) => response)
     .catch((err) => err);
 }
 
 function removeFromCart(prodId) {
   return axios
-    .delete(`${BaseUrl}/${prodId}`, { headers })
+    .delete(`${BaseUrl}/cart/${prodId}`, { headers })
     .then((response) => response)
     .catch((err) => err);
 }
 function updateCartQyantity(prodId, count) {
   return axios
     .put(
-      `https://ecommerce.routemisr.com/api/v1/cart/${prodId}`,
+      `${BaseUrl}/cart/${prodId}`,
       { count },
       {
         headers,
@@ -41,7 +37,7 @@ function updateCartQyantity(prodId, count) {
 }
 function clearCart() {
   return axios
-    .delete(`${BaseUrl}`, { headers })
+    .delete(`${BaseUrl}/cart`, { headers })
     .then((response) => response)
     .catch((err) => err);
 }
