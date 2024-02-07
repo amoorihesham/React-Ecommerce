@@ -5,6 +5,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import { CartContext } from "../../context/CartContext";
 import { toast } from "react-toastify";
+import { Triangle } from "react-loader-spinner";
+import SuggestedProducts from "../SuggestedProducts/SuggestedProducts";
 const Product = () => {
   const settings = {
     dots: false,
@@ -19,7 +21,20 @@ const Product = () => {
   const params = useParams();
   const [productDetails, setProductDetails] = useState(null);
   const { addToCart, setCartCount } = useContext(CartContext);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  function setSugProduct(product){
+    setProductDetails(product)
+  }
+  async function getFeaturedProducts() {
+    setLoading(true);
+    const { data } = await axios
+      .get("https://ecommerce.routemisr.com/api/v1/products")
+      .catch((err) => console.log(err));
+    setProducts(data.data);
+    setLoading(false);
+  }
   async function addToCartFromProductPage(prodId) {
     const { data } = await addToCart(prodId);
     await setCartCount(data?.numOfCartItems);
@@ -38,6 +53,7 @@ const Product = () => {
         setProductDetails(data?.data.data);
       })
       .catch((err) => console.log(err));
+    getFeaturedProducts();
   }, []);
   return (
     <div className="container h-100vh py-5">
@@ -75,6 +91,15 @@ const Product = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="Suggested mt-5 bg-body-secondary p-3">
+        {loading ? (
+          <div className=" h-100vh d-flex align-items-center justify-content-center">
+            <Triangle />
+          </div>
+        ) : (
+          <SuggestedProducts products={products} product={productDetails} set={setProductDetails} />
+        )}
       </div>
     </div>
   );

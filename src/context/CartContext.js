@@ -5,21 +5,21 @@ export const CartContext = createContext();
 
 function addToCart(prodId) {
   return axios
-    .post(`${BaseUrl}/cart`, prodId, { headers })
+    .post(`${BaseUrl}/cart`, prodId, headers)
     .then((response) => response)
     .catch((err) => err);
 }
 
 function getLoggedUserCart() {
   return axios
-    .get(`${BaseUrl}/cart`, { headers })
+    .get(`${BaseUrl}/cart`, headers)
     .then((response) => response)
     .catch((err) => err);
 }
 
 function removeFromCart(prodId) {
   return axios
-    .delete(`${BaseUrl}/cart/${prodId}`, { headers })
+    .delete(`${BaseUrl}/cart/${prodId}`, headers)
     .then((response) => response)
     .catch((err) => err);
 }
@@ -28,16 +28,15 @@ function updateCartQyantity(prodId, count) {
     .put(
       `${BaseUrl}/cart/${prodId}`,
       { count },
-      {
-        headers,
-      }
+
+      headers
     )
     .then((response) => response)
     .catch((err) => err);
 }
 function clearCart() {
   return axios
-    .delete(`${BaseUrl}/cart`, { headers })
+    .delete(`${BaseUrl}/cart`, headers)
     .then((response) => response)
     .catch((err) => err);
 }
