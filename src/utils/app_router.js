@@ -1,26 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
 import {
   Layout,
-  Home,
-  Cart,
   Login,
   Register,
   Profile,
-  Products,
-  Categories,
-  Brands,
-  Product,
-  WishList,
   NotFound,
   ProtectedRoute,
-  SubCategories,
   SubCategory,
-  BrandProducts,
   PasswordReset,
   EnterNewPass,
   Checkout,
   UserOrders,
 } from "../components";
+import {
+  Home,
+  Products,
+  Categories,
+  Brands,
+  BrandProducts,
+  SingleProductPage,
+  Cart,
+  Wishlist,
+  SubCate,
+} from "../pages";
 
 const app_router = createBrowserRouter([
   {
@@ -32,6 +34,30 @@ const app_router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/products",
+        element: (
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/categories",
+        element: (
+          <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/brands",
+        element: (
+          <ProtectedRoute>
+            <Brands />
           </ProtectedRoute>
         ),
       },
@@ -55,30 +81,16 @@ const app_router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/products",
-        element: (
-          <ProtectedRoute>
-            <Products />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/products/:id",
         element: (
           <ProtectedRoute>
-            <Product />
+            <SingleProductPage />
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/categories",
-        element: (
-          <ProtectedRoute>
-            <Categories />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/checkout",
         element: (
@@ -91,7 +103,7 @@ const app_router = createBrowserRouter([
         path: "/categories/:id/subcategories",
         element: (
           <ProtectedRoute>
-            <SubCategories />
+            <SubCate />
           </ProtectedRoute>
         ),
       },
@@ -105,14 +117,6 @@ const app_router = createBrowserRouter([
       },
 
       {
-        path: "/brands",
-        element: (
-          <ProtectedRoute>
-            <Brands />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/brands/:name",
         element: (
           <ProtectedRoute>
@@ -124,7 +128,7 @@ const app_router = createBrowserRouter([
         path: "/wishlist",
         element: (
           <ProtectedRoute>
-            <WishList />
+            <Wishlist />
           </ProtectedRoute>
         ),
       },
@@ -140,6 +144,5 @@ const app_router = createBrowserRouter([
     ],
   },
 ]);
-
 
 export default app_router;
