@@ -100,7 +100,7 @@ const app_router = createBrowserRouter([
         ),
       },
       {
-        path: "/categories/:id/subcategories",
+        path: "/:name/main_cate_id=/:id/subcategories",
         element: (
           <ProtectedRoute>
             <SubCate />
@@ -108,7 +108,7 @@ const app_router = createBrowserRouter([
         ),
       },
       {
-        path: "/subcategories/:id",
+        path: "/subcategory/:id/:name",
         element: (
           <ProtectedRoute>
             <SubCategory />

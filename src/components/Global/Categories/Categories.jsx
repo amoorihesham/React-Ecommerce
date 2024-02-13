@@ -41,7 +41,7 @@ const Categories = () => {
             <Slider {...settings}>
               {categories.map((cate) => (
                 <Link
-                  to={`/categories/${cate._id}/subcategories`}
+                  to={`/${cate.name}/main_cate_id=/${cate._id}/subcategories`}
                   key={cate.name}
                 >
                   <div className="box cursor-pointer">

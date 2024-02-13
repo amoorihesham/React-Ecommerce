@@ -58,8 +58,14 @@ a:hover {
 .bg-main-light {
   background-color: var(--light-color) !important;
 }
+.w-64p {
+  width: 64px;
+}
 .w-100p {
   width: 100px;
+}
+.w-128p {
+  width: 128px;
 }
 .w-50p {
   width: 50px;
