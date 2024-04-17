@@ -1,7 +1,7 @@
-import { Cart } from "../../components";
+import { Cart } from '../../components';
 
 const CartPageContainer = () => {
-  return <Cart />;
+	return <Cart />;
 };
 
 export default CartPageContainer;

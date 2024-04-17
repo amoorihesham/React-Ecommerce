@@ -1,7 +1,7 @@
-import { CategoriesPageContainer } from "../../containers";
+import { CategoriesPageContainer } from '../../containers';
 
 const Categories = () => {
-  return <CategoriesPageContainer />;
+	return <CategoriesPageContainer />;
 };
 
 export default Categories;

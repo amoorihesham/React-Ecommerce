@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string, ref } from 'yup';
-import axios from 'axios';
 import { Grid } from 'react-loader-spinner';
+import axios from 'axios';
 
 const Register = () => {
 	const navigate = useNavigate();

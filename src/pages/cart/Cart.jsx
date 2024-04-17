@@ -1,7 +1,7 @@
-import { CartPageContainer } from "../../containers";
+import { CartPageContainer } from '../../containers';
 
 const Cart = () => {
-  return <CartPageContainer />;
+	return <CartPageContainer />;
 };
 
 export default Cart;

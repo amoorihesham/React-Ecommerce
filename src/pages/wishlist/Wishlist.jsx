@@ -1,9 +1,7 @@
-import { WishlistPageContainer } from "../../containers"
+import { WishlistPageContainer } from '../../containers';
 
 const Wishlist = () => {
-  return (
-  <WishlistPageContainer/>
-  )
-}
+	return <WishlistPageContainer />;
+};
 
-export default Wishlist
+export default Wishlist;

@@ -1,7 +1,7 @@
-import { BrandProductsContainer } from "../../containers";
+import { BrandProductsContainer } from '../../containers';
 
 const BrandProducts = () => {
-  return <BrandProductsContainer />;
+	return <BrandProductsContainer />;
 };
 
 export default BrandProducts;

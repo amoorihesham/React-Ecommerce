@@ -1,7 +1,7 @@
-import { WishList } from "../../components";
+import { WishList } from '../../components';
 
 const WishlistPageContainer = () => {
-  return <WishList />;
+	return <WishList />;
 };
 
 export default WishlistPageContainer;

@@ -1,10 +1,7 @@
-import { SubCatePageContainer } from "../../containers"
-
+import { SubCatePageContainer } from '../../containers';
 
 const SubCate = () => {
-  return (
-    <SubCatePageContainer/>
-  )
-}
+	return <SubCatePageContainer />;
+};
 
-export default SubCate
+export default SubCate;

@@ -1,7 +1,6 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../../context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Checkout = () => {
 	const [details, setDetails] = useState('');

@@ -1,11 +1,11 @@
-import { Categories } from "../../components";
+import { Categories } from '../../components';
 
 const CategoriesPageContainer = () => {
-  return (
-    <>
-      <Categories />
-    </>
-  );
+	return (
+		<>
+			<Categories />
+		</>
+	);
 };
 
 export default CategoriesPageContainer;
