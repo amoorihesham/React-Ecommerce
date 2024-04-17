@@ -11,23 +11,23 @@ const Checkout = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await axios
-			.post(
-				`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://react-ecommerce-delta-woad.vercel.app/profile`,
-				{
-					shippingAddress: {
-						details,
-						phone,
-						city,
-					},
+		const {
+			data: { status, session },
+		} = await axios.post(
+			`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://react-ecommerce-delta-woad.vercel.app`,
+			{
+				shippingAddress: {
+					details,
+					phone,
+					city,
 				},
-				{ headers: { token: localStorage.getItem('userToken') } }
-			)
-			.then((res) => {
-				console.log(res.data);
-				window.location = res?.data.session.url;
-			})
-			.catch((err) => console.log(err));
+			},
+			{ headers: { token: localStorage.getItem('userToken') } }
+		);
+
+		if (status === 'success') {
+			window.location = session?.url;
+		}
 	};
 
 	const CartId = async () => {
