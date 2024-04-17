@@ -22,7 +22,7 @@ const OrdersPage = () => {
 
 	useEffect(() => {
 		getUserOrders();
-	}, []);
+	}, [decodedToken]);
 	return (
 		<div className='ProfilePage h-100vh py-4'>
 			<div className='container'>
