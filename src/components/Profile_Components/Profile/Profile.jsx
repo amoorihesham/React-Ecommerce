@@ -175,7 +175,7 @@ const Profile = () => {
             <h5 className=" text-main mb-3 fw-bold">
               User Orders: ( {userOrders.length} )
             </h5>
-            <div className="row">
+            <div className="row g-4">
               {userOrders?.map((order, idx) => (
                 <UserOrderCard order={order} key={idx} />
               ))}
