@@ -11,8 +11,7 @@ import {
 	EnterNewPass,
 	Checkout,
 } from '../components';
-import { Home, Products, Categories, Brands, BrandProducts, SingleProductPage, Cart, Wishlist, SubCate } from '../pages';
-import OrdersPage from '../pages/Orders/OrdersPage';
+import { Home, Products, Categories, Brands, BrandProducts, SingleProductPage, Cart, Wishlist, SubCate, OrdersPage } from '../pages';
 
 const app_router = createBrowserRouter([
 	{
