@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { Triangle } from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
 import ProductCard from '../ProductCard/ProductCard';
-import axios from 'axios';
 import useProducts from '../../../hooks/useProducts';
 
 const FeaturedProductsPage = () => {
-  const { data, isError, error, isPending, isLoading } = useProducts();
+  const { data, isError, error, isLoading } = useProducts();
 
   const products = data?.data?.data;
   console.log(products);
