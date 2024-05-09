@@ -9,7 +9,7 @@ const Footer = () => {
     <div className='footer bg-main-light p-4 pb-0'>
       <div className='container'>
         <h3>Get The FreshCart App</h3>
-        <p>We will send you a link, open it on your phone to download the app.</p>
+        <p className='footer-p'>We will send you a link, open it on your phone to download the app.</p>
         <div className='form  border-bottom pb-3'>
           <form className='d-flex mx-auto  justify-content-between'>
             <input

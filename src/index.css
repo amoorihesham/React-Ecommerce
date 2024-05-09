@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap'); */
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
@@ -8,8 +8,13 @@
   --rating-color: #ffc908;
 }
 
-body {
+/* body {
   font-family: var(--font-family) !important;
+} */
+@media (max-width: 767px) {
+  .footer-p {
+    font-size: 10px;
+  }
 }
 .rating-color {
   color: var(--rating-color);
