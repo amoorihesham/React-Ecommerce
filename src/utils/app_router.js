@@ -1,11 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Layout, Login, Register, Profile, NotFound, ProtectedRoute, SubCategory, PasswordReset, EnterNewPass, Checkout } from '../components';
-import { Home, Products, Categories, Brands, BrandProducts, SubCate } from '../pages';
+import { Layout, NotFound, ProtectedRoute, SubCategory, Checkout } from '../components';
+import { Home, BrandProducts, SubCate } from '../pages';
 import { Suspense, lazy } from 'react';
+const Login = lazy(() => import('../components/Auth_Components/Login/Login.jsx'));
+const Register = lazy(() => import('../components/Auth_Components/Register/Register.jsx'));
+const PasswordReset = lazy(() => import('../components/Auth_Components/PasswordReset/PasswordReset.jsx'));
+const EnterNewPass = lazy(() => import('../components/Auth_Components/EnterNewPass/EnterNewPass.jsx'));
+const Profile = lazy(() => import('../components/Profile_Components/Profile/Profile.jsx'));
 const Cart = lazy(() => import('../pages/cart/Cart.jsx'));
 const SingleProductPage = lazy(() => import('../pages/Product_Page/ProductPage.jsx'));
 const Wishlist = lazy(() => import('../pages/wishlist/Wishlist.jsx'));
 const OrdersPage = lazy(() => import('../pages/Orders/OrdersPage.jsx'));
+const BrandProducts = lazy(() => import('../pages/Brand_Products/Brand_Products.jsx'));
+const Categories = lazy(() => import('../pages/categories/Categories.jsx'));
+const Products = lazy(() => import('../pages/products/Products.jsx'));
 
 const app_router = createBrowserRouter([
   {
@@ -23,37 +31,73 @@ const app_router = createBrowserRouter([
       {
         path: '/products',
         element: (
-          <ProtectedRoute>
-            <Products />
-          </ProtectedRoute>
+          <Suspense fallback={'loading...'}>
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          </Suspense>
         ),
       },
       {
         path: '/categories',
         element: (
-          <ProtectedRoute>
-            <Categories />
-          </ProtectedRoute>
+          <Suspense fallback={'loading...'}>
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          </Suspense>
         ),
       },
       {
         path: '/brands',
         element: (
-          <ProtectedRoute>
-            <Brands />
-          </ProtectedRoute>
+          <Suspense fallback={'loading...'}>
+            <ProtectedRoute>
+              <BrandProducts />
+            </ProtectedRoute>
+          </Suspense>
         ),
       },
-      { path: '/login', element: <Login /> },
-      { path: '/passwordreset', element: <PasswordReset /> },
-      { path: '/newpassword', element: <EnterNewPass /> },
-      { path: '/register', element: <Register /> },
+      {
+        path: '/login',
+        element: (
+          <Suspense fallback={'loading...'}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/passwordreset',
+        element: (
+          <Suspense fallback={'loading...'}>
+            <PasswordReset />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/newpassword',
+        element: (
+          <Suspense fallback={'loading...'}>
+            <EnterNewPass />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/register',
+        element: (
+          <Suspense fallback={'loading...'}>
+            <Register />
+          </Suspense>
+        ),
+      },
       {
         path: '/profile',
         element: (
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
+          <Suspense fallback={'loading...'}>
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          </Suspense>
         ),
       },
       {
