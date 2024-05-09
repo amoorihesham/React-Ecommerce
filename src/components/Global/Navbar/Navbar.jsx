@@ -91,7 +91,10 @@ const Navbar = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  <i className='fa-solid fa-circle-user fa-2x'></i>
+                  <i
+                    className='fa-solid fa-circle-user fa-fw'
+                    style={{ fontSize: '20px' }}
+                  ></i>
                 </a>
 
                 <ul className='dropdown-menu'>

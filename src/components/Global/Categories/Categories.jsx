@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getAllCategories } from '../../../services/services';
 import { Triangle } from 'react-loader-spinner';
 import Slider from 'react-slick';
+import useCategories from '../../../hooks/useCategoris';
 
 const Categories = () => {
   const settings = {
@@ -15,10 +14,7 @@ const Categories = () => {
     arrows: false,
   };
 
-  const { data, isError, error, isPending } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getAllCategories,
-  });
+  const { data, isError, error, isPending } = useCategories();
 
   if (isError) {
     return (

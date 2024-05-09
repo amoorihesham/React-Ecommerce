@@ -6,8 +6,6 @@ import { app_router } from './utils';
 
 import './App.css';
 
-const client = new QueryClient();
-
 function App() {
   const { setUserToken } = useContext(UserContext);
   const { getLoggedUserCart } = useContext(CartContext);
@@ -21,11 +19,7 @@ function App() {
     }
   }, []);
 
-  return (
-    <QueryClientProvider client={client}>
-      <RouterProvider router={app_router}></RouterProvider>
-    </QueryClientProvider>
-  );
+  return <RouterProvider router={app_router}></RouterProvider>;
 }
 
 export default App;
