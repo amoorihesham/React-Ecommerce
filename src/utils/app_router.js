@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout, NotFound, ProtectedRoute, SubCategory, Checkout } from '../components';
-import { Home, BrandProducts, SubCate } from '../pages';
+import { Home, SubCate } from '../pages';
 import { Suspense, lazy } from 'react';
 const Login = lazy(() => import('../components/Auth_Components/Login/Login.jsx'));
 const Register = lazy(() => import('../components/Auth_Components/Register/Register.jsx'));
