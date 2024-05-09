@@ -81,12 +81,7 @@ const CartContextProvider = ({ children }) => {
     try {
       setIsLoading(true);
       const { data } = await axios.delete(`${BaseUrl}/cart/${prodId}`, headers);
-      setUserCart({
-        cartCount: data?.numOfCartItems,
-        cart: {
-          ...data?.data,
-        },
-      });
+      await getLoggedUserCart();
       toast('Success', {
         type: 'success',
       });
