@@ -77,7 +77,7 @@ const Cart = () => {
                       <span className='fw-bold d-inline-block mx-3'>{product?.count}</span>
                       <button
                         className='btn btn-sm bg-main text-white font-sm'
-                        disabled={product?.product?.count > 1 ? false : true}
+                        disabled={product?.count > 1 ? false : true}
                         onClick={() => {
                           updateCartQyantity(product?.product?._id, product?.count - 1);
                         }}
