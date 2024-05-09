@@ -1,30 +1,28 @@
-import "./App.css";
-import { useContext, useEffect } from "react";
-import { RouterProvider } from "react-router-dom";
-import { UserContext, CartContext, WishListContext } from "./context";
-import { app_router } from "./utils";
+import { useContext, useEffect } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { UserContext, CartContext } from './context';
+import { app_router } from './utils';
+import './App.css';
+
+const client = new QueryClient();
 
 function App() {
   const { setUserToken } = useContext(UserContext);
-  const { getLoggedUserCart, setCartCount } = useContext(CartContext);
-  const { setWishListCount, GetUserWishList } = useContext(WishListContext);
-
-  async function setCartCountData() {
-    const { data: cartCount } = await getLoggedUserCart();
-    const { data: wishListCount } = await GetUserWishList();
-
-    await setWishListCount(wishListCount?.data?.count);
-    await setCartCount(cartCount?.numOfCartItems);
-  }
+  const { getLoggedUserCart } = useContext(CartContext);
 
   useEffect(() => {
-    if (localStorage.getItem("userToken") !== null) {
-      setUserToken(localStorage.getItem("userToken"));
-      setCartCountData();
+    if (localStorage.getItem('userToken') !== null) {
+      setUserToken(localStorage.getItem('userToken'));
+      getLoggedUserCart();
     }
   }, []);
 
-  return <RouterProvider router={app_router}></RouterProvider>;
+  return (
+    <QueryClientProvider client={client}>
+      <RouterProvider router={app_router}></RouterProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;
