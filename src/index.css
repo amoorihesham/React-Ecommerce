@@ -1,12 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
-  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
-    rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
-    rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
-  --font-family: "Encode Sans Expanded", sans-serif;
+  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px, rgba(145, 158, 171, 0.14) 0px 4px 5px 0px, rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+  --font-family: 'Encode Sans Expanded', sans-serif;
   --rating-color: #ffc908;
 }
 
@@ -97,12 +95,12 @@ a:hover {
 }
 .cartNumber {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -10px;
+  left: 10px;
   background-color: red;
   padding: 5px;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   color: white;
   border-radius: 50%;
   display: flex;

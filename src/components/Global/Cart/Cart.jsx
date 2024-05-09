@@ -24,7 +24,7 @@ const Cart = () => {
         <div className='container'>
           <div className='wraper bg-main-light p-4 rounded'>
             <h3>Shop Cart:</h3>
-            <p className='text-main'>Total Cart Price: {userCart?.cart?.totalCartPrice || 0} EGP</p>
+            <p className='text-main'>Total Cart Price: {userCart?.cart?.totalPrice || 0} EGP</p>
             <p className='text-main'>Total Cart Items ({userCart?.cartCount || 0})</p>
             <button
               className='btn bg-main text-white mb-4'

@@ -5,22 +5,7 @@ import { WishListContext, CartContext } from '../../../context';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
-
-  const { addToWishList, setWishListCount, GetUserWishList } = useContext(WishListContext);
-
-  async function addToWISHLIST(prodId) {
-    const { data } = await addToWishList(prodId);
-    const res = await GetUserWishList();
-    setWishListCount(res?.data?.count);
-
-    if (data?.status === 'success') {
-      toast('Product Add Successfully', {
-        type: 'success',
-        autoClose: 1000,
-        hideProgressBar: false,
-      });
-    }
-  }
+  const { addToWishList } = useContext(WishListContext);
 
   return (
     <div
@@ -49,7 +34,7 @@ const ProductCard = ({ product }) => {
         </button>
         <button
           className='btn bg-main text-white w-100 btn-sm'
-          onClick={() => addToWISHLIST({ productId: product._id })}
+          onClick={() => addToWishList({ productId: product._id })}
         >
           <i className='fa-solid fa-heart-circle-plus fs-fw'></i> Add To WishList
         </button>

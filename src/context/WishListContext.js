@@ -1,42 +1,73 @@
 import { createContext, useState } from 'react';
 import { BaseUrl, headers } from '../utils/req_globals';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const WishListContext = createContext();
 
-function addToWishList(prodId) {
-	return axios
-		.post(`${BaseUrl}/wishlist`, prodId, headers)
-		.then((response) => response)
-		.catch((err) => err);
-}
-function GetUserWishList() {
-	return axios
-		.get(`${BaseUrl}/wishlist`, headers)
-		.then((response) => response)
-		.catch((err) => err);
-}
-function RemoveFromWishList(prodId) {
-	return axios
-		.delete(`${BaseUrl}/wishlist/${prodId}`, headers)
-		.then((response) => response)
-		.catch((err) => err);
-}
-
 const WishListContextProvider = ({ children }) => {
-	const [wishListCount, setWishListCount] = useState(null);
-	return (
-		<WishListContext.Provider
-			value={{
-				addToWishList,
-				GetUserWishList,
-				RemoveFromWishList,
-				setWishListCount,
-				wishListCount,
-			}}
-		>
-			{children}
-		</WishListContext.Provider>
-	);
+  const [userWishlist, setUserWishlist] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  async function getLoggedUserWishlist() {
+    try {
+      const { data } = await axios.get(`${BaseUrl}/wishlist`, headers);
+      setUserWishlist({
+        count: data?.count,
+        wishlist: data?.data,
+      });
+    } catch (error) {
+      setUserWishlist({
+        count: 0,
+        wishlist: {},
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  async function addToWishList(prodId) {
+    try {
+      const { data } = await axios.post(`${BaseUrl}/wishlist`, prodId, headers);
+      await getLoggedUserWishlist();
+      toast('Success', {
+        type: 'success',
+      });
+    } catch (error) {
+      toast(error?.response?.data?.message, {
+        type: 'error',
+      });
+    }
+  }
+  async function RemoveFromWishList(prodId) {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.delete(`${BaseUrl}/wishlist/${prodId}`, headers);
+      setUserWishlist({
+        count: data?.count || 0,
+        wishlist: data?.data,
+      });
+      toast('Success', {
+        type: 'success',
+      });
+    } catch (error) {
+      toast(error?.response?.data?.message, {
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  return (
+    <WishListContext.Provider
+      value={{
+        addToWishList,
+        getLoggedUserWishlist,
+        RemoveFromWishList,
+        userWishlist,
+        isLoading,
+      }}
+    >
+      {children}
+    </WishListContext.Provider>
+  );
 };
 export default WishListContextProvider;

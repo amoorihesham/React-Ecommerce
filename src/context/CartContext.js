@@ -15,7 +15,8 @@ const CartContextProvider = ({ children }) => {
       setUserCart({
         cartCount: data?.numOfCartItems,
         cart: {
-          ...data?.data,
+          totalPrice: data?.data?.totalCartPrice,
+          products: data?.data?.products,
         },
       });
     } catch (error) {
@@ -36,12 +37,7 @@ const CartContextProvider = ({ children }) => {
   async function addToCart(prodId) {
     try {
       const { data } = await axios.post(`${BaseUrl}/cart`, prodId, headers);
-      setUserCart({
-        cartCount: data?.numOfCartItems,
-        cart: {
-          ...data?.data,
-        },
-      });
+      await getLoggedUserCart();
       toast(data?.message, {
         type: 'success',
       });
