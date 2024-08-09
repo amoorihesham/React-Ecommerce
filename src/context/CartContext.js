@@ -12,10 +12,12 @@ const CartContextProvider = ({ children }) => {
 	async function getLoggedUserCart() {
 		try {
 			const { data } = await axios.get(api.cartUrl, headers);
+
 			setUserCart({
 				cartCount: data?.numOfCartItems,
 				totalPrice: data?.data?.totalCartPrice,
 				products: data?.data?.products,
+				cartId: data?.data?._id,
 			});
 		} catch (error) {
 			if (error?.response?.status === 404) {
